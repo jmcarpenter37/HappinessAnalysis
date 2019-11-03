@@ -6,8 +6,23 @@ def glob_file(path_to_csv):
     files = glob.glob1(path_to_csv , "*.csv")
     return files
 # Read data into pandas dataframe function
-def read_data(data_file_list):
-    for file in range(len(data_file_list)):
-        df = pd.read_csv(r"{}".format(file))
-        print(df)
+def csv_to_dataframe(file_path):
+    df = pd.read_csv(file_path)
+    return df
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

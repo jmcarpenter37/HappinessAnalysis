@@ -6,14 +6,20 @@ import readDat
 import filePath
 import os
 def main():
-    os.chdir(filePath.path["path"])
+    try:
+        os.chdir(filePath.path["path"])
+    except NotADirectoryError as err:
+        print("That's not a valid path on this machine.")
+        print("Error: {}".format(err))
     # CSV file path here
-    # You may need to change your path in the filePath.py file!
-    path = filePath.path["path"]
-    # Get the CSV files using readDat
-    file_paths = readDat.glob_file(path)
-    # read each csv into a pandas df
-    readDat.read_data(file_paths)
+    # User will need to change the path of where the CSV files live.
+    # read each csv into a pandas dataframes
+    try:
+        df2015 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2015.csv")
+        df2016 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2016.csv")
+        df2017 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2017.csv")
+    except:
+        print("Failed to read a csv file to pandas dataframe!")
     ###############################
     ###############################
 
