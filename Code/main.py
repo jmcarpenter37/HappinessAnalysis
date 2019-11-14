@@ -17,6 +17,7 @@ def main():
     df2015 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2015.csv")
     df2016 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2016.csv")
     df2017 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2017.csv")
+    # Data cleansing
     # Rename years
     df2015['year']=2015
     df2016['year']=2016
@@ -27,13 +28,12 @@ def main():
                                     'Trust..Government.Corruption.':'Trust (Government Corruption)','Dystopia.Residual':'Dystopia Residual'})
     df2017 = df2017.replace(to_replace="Hong Kong S.A.R., China" , value ="Hong Kong")
     df2017 = df2017.replace(to_replace="Taiwan Province of China",value ="Taiwan")
-
+    # Stacking the data into one pandas df
     stacked_data = df2015.append(df2016)
     stacked_data = stacked_data.append(df2017)
-
     region_df = df2016[['Country', 'Region']]
-    df2017 = df2017.merge(region_df, how='left', on='Country')
-    
+    stacked_data = df2017.merge(region_df, how='left', on='Country')
+
 
 
 
