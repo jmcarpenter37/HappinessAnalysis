@@ -17,19 +17,25 @@ def main():
     df2015 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2015.csv")
     df2016 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2016.csv")
     df2017 = readDat.csv_to_dataframe(r"C:\Users\jmcarpenter\Desktop\UVA Graduate School Stuff\CS_DataScience_5010\CS_5010\CS_Project\HappinessAnalysis\2017.csv")
-    # Need to look into each CSV and find the discrepancies
-    # Get the keys
-    #print(df2015.keys()) # ['Country', 'Region', 'Happiness Rank', 'Happiness Score','Standard Error', 'Economy (GDP per Capita)', 'Family','Health (Life Expectancy)', 'Freedom', 'Trust (Government Corruption)','Generosity', 'Dystopia Residual']
-    #print(df2016.keys()) # ['Country', 'Region', 'Happiness Rank', 'Happiness Score','Lower Confidence Interval', 'Upper Confidence Interval', 'Economy (GDP per Capita)', 'Family', 'Health (Life Expectancy)','Freedom', 'Trust (Government Corruption)', 'Generosity', 'Dystopia Residual']
-    #print(df2017.keys()) # ['Country', 'Happiness.Rank', 'Happiness.Score', 'Whisker.high', 'Whisker.low', 'Economy..GDP.per.Capita.', 'Family', 'Health..Life.Expectancy.', 'Freedom', 'Generosity', 'Trust..Government.Corruption.', 'Dystopia.Residual']
-    # We can see that the keys vary from df to df
-    #print(df2015["Country"])
-    #print(df2015["Country"].isin(df2016["Country"]))
-    #print(len(df2015.keys())) 12
-    #print(len(df2016.keys())) 13
-    #print(len(df2017.keys())) 12
+    # Rename years
+    df2015['year']=2015
+    df2016['year']=2016
+    df2017['year']=2017
     #
+    df2017 = df2017.rename(columns={'Happiness.Rank': 'Happiness Rank', 'Happiness.Score': 'Happiness Score',
+                                    'Economy..GDP.per.Capita.':'Economy (GDP per Capita)',  'Health..Life.Expectancy.':'Health (Life Expectancy)',
+                                    'Trust..Government.Corruption.':'Trust (Government Corruption)','Dystopia.Residual':'Dystopia Residual'})
+    df2017 = df2017.replace(to_replace="Hong Kong S.A.R., China" , value ="Hong Kong")
+    df2017 = df2017.replace(to_replace="Taiwan Province of China",value ="Taiwan")
+
+    stacked_data = df2015.append(df2016)
+    stacked_data = stacked_data.append(df2017)
+
+    region_df = df2016[['Country', 'Region']]
+    df2017 = df2017.merge(region_df, how='left', on='Country')
     
+
+
 
 
 if __name__=="__main__":
