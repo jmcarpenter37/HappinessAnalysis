@@ -25,14 +25,11 @@ def main():
     # We can see that the keys vary from df to df
     #print(df2015["Country"])
     #print(df2015["Country"].isin(df2016["Country"]))
-    print(len(df2015.keys()))
-    print(len(df2016.keys()))
-    print(len(df2017.keys()))
-    df_new=df2015.append(df2016)
-    df_new=df_new.append(df2017)
-    print(df_new.keys())
-    print(len(df_new.keys()))
-
+    #print(len(df2015.keys())) 12
+    #print(len(df2016.keys())) 13
+    #print(len(df2017.keys())) 12
+    #
+    
 
 
 if __name__=="__main__":
