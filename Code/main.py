@@ -8,6 +8,7 @@ import os
 import folium as fol
 from folium import *
 from folium.plugins import heat_map
+import Mapper
 def main():
     try:
         os.chdir(filePath.path["path"])
@@ -39,10 +40,23 @@ def main():
     # printing country
     print(stacked_data['Country'])
     # Lets get a map
-    map=fol.Map(location=[40.693 , -73.985] , control_scale=True, zoom_control=12)
-    fol.Marker(location=[40.693 , -73.985] , popup="Put some data in here. Data data data dat data dat dat dat dat dat dat dat dat" ,icon=fol.Icon() ).add_to(map)
-    map.save("my_map.html")
-
+    #map=fol.Map(location=[40.693 , -73.985] , control_scale=True, zoom_control=12)
+    #fol.Marker(location=[40.693 , -73.985] , popup="Put some data in here. Data data data dat data dat dat dat dat dat dat dat dat" ,icon=fol.Icon() ).add_to(map)
+    #map.save("my_map.html")
+    #for country in range(len(stacked_data["Country"])):
+    #    print(stacked_data["Country"][country])
+    #    Mapper.pos_print( stacked_data["Country"][country])
+    # We need to initialize a map object and then loop throught the ith+1 : len(data) value
+    # I'll explain why I did it this way
+    global MyMap # Create a global variable that the for loop below has access to
+    MyMap = fol.Map() # Create an empy map object
+    for country in range(len(stacked_data["Country"])):
+        position = Mapper.pos_print(stacked_data["Country"][country])
+        #print(position[0] , position[1])
+        print(country)
+        #map = fol.Map(location=[position[0],position[1]] , control_scale=True,zoom_control=12)
+        fol.Marker(location=[position[0],position[1]] , popup="{}".format(country),icon=fol.Icon()).add_to(MyMap) # Add pinpoints to the mal
+    MyMap.save("Pinpoints_Map.html") # Save the map as an html file
 
 if __name__=="__main__":
     main()
