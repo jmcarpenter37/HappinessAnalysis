@@ -5,6 +5,9 @@ from matplotlib import pyplot as plt
 import readDat
 import filePath
 import os
+import folium as fol
+from folium import *
+from folium.plugins import heat_map
 def main():
     try:
         os.chdir(filePath.path["path"])
@@ -33,9 +36,12 @@ def main():
     stacked_data = stacked_data.append(df2017)
     region_df = df2016[['Country', 'Region']]
     stacked_data = df2017.merge(region_df, how='left', on='Country')
-
-
-
+    # printing country
+    print(stacked_data['Country'])
+    # Lets get a map
+    map=fol.Map(location=[40.693 , -73.985] , control_scale=True, zoom_control=12)
+    fol.Marker(location=[40.693 , -73.985] , popup="Put some data in here. Data data data dat data dat dat dat dat dat dat dat dat" ,icon=fol.Icon() ).add_to(map)
+    map.save("my_map.html")
 
 
 if __name__=="__main__":
