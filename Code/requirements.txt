@@ -1,4 +1,7 @@
+# From the command line the user can install all dependencies recursively
+# $ pip install -r requirements.txt
 numpy
 pandas
 folium
 datapackage
+countryinfo
