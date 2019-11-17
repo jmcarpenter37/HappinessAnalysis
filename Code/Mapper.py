@@ -12,3 +12,6 @@ def pos_print(country):
         print("Something went wrong when looking up that country!")
         print(err)
 
+
+a = pos_print("Republic of Georgia")
+print(a)

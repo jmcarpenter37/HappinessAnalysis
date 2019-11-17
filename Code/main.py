@@ -48,15 +48,6 @@ def main():
     #    Mapper.pos_print( stacked_data["Country"][country])
     # We need to initialize a map object and then loop throught the ith+1 : len(data) value
     # I'll explain why I did it this way
-    global MyMap # Create a global variable that the for loop below has access to
-    MyMap = fol.Map() # Create an empy map object
-    for country in range(len(stacked_data["Country"])):
-        position = Mapper.pos_print(stacked_data["Country"][country])
-        #print(position[0] , position[1])
-        print(country)
-        #map = fol.Map(location=[position[0],position[1]] , control_scale=True,zoom_control=12)
-        fol.Marker(location=[position[0],position[1]] , popup="{}".format(country),icon=fol.Icon()).add_to(MyMap) # Add pinpoints to the mal
-    MyMap.save("Pinpoints_Map.html") # Save the map as an html file
 
 if __name__=="__main__":
     main()
